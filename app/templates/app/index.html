@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'my-tasks-styles.css' %}">
+</head>
+<body>
+    <h1>My Tasks: </h1>
+
+    {% for task in tasks %}
+    <form action="{% url 'app:index' %}" method="post">
+        {% csrf_token %}
+        <h3>{{ task }}</h3>
+        <input type="hidden" name="title" value="{{ task }}">
+        <input type="submit" value="Delete">
+    </form>
+    {% endfor %}
+    <a style="color: blue; text-decoration: underline; font-style: italic;" href="{% url 'app:add-task' %}">add a task</a>
+</body>
+</html>
